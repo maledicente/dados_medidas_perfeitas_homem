@@ -4,18 +4,16 @@ import numpy as np
 import random
 import os
 # -*- coding: utf-8 -*-
-
 """
 Created on Thu Aug 13 2020
 
 @author: Luiz Paulo Nievola
 """
-   
 #Variaveis
 
 coef=pescoco=biceps=antebraco=peito=cintura=quadris=coxas=panturrilha=des=0
 coef_atual = [0.441,41,36,30,109,99,100,59,41]
-coef_des = geek.arange(8)
+coef_des=[0.370,37.1,34.8,29.0,97.1,72.7,87.3,52.3,34.8]
 
 al=float(input("Qual sua altura(0.00cm)? "))
 pe=float(input("Qual seu peso(Kg)? "))
@@ -29,14 +27,13 @@ df=pd.read_csv('data_med.csv')
 x=df.loc[df['Coeficiente']==coef].values
 
 
-
-
 plt.title("Comparativo medidas")
-#plt.bar(coef_des,coef_atual)
+plt.bar(coef_des,coef_atual)
+plt.show()
 plt.gray()
 plt.xlabel('Coeficiente desejado')
 plt.ylabel('Coeficiente atual')
-print(coef_des)
+
 
 #print(coef_des)
 #print("\n\033[32m",type(coef_atual-x))
