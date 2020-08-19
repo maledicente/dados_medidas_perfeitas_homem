@@ -1,0 +1,4 @@
+- Usuario insere as medidas
+- Criado atquivo .csv do usuario
+- Criado 2 data frame com os arquivos do usuario e valores padrao
+- Mostrar em grafico os valores atuais do usuario e sua proximidade ao padrao
