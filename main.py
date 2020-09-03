@@ -4,47 +4,78 @@ import numpy as np
 import random
 import os
 import csv
+
 # -*- coding: utf-8 -*-
 """
-Created on Thu Aug 13 2020
+Created on Thu Aug 13 2020 
 
 @author: Luiz Paulo Nievola
 """
-#Variaveis
-med_objetivo=csv.reader(open("data_med.csv","r"))
-med_atual=csv.writer(open("data_atual.csv","wb"))
-objetivo=pd.read_csv("data_med.csv", sep=',')
+class Pessoa():
+   def __init__(self,n,al,pe,p,b,a,pei,ci,co,pa):
+      self.nome = n
+      self.altura = al
+      self.peso = pe
+      self.pescoco = pe
+      self.biceps = b
+      self.antebraco = a
+      self.peito = pei
+      self.cintura = ci
+      self.coxas = co
+      self.panturrilha = pa
+   def Imc(self):
+       return round(self.peso / (pow(self.altura, 2)),2)
+   def Coef(self):
+       return round((self.peso/self.altura)/100,3)
+   def Dados(self):
+      print("{} seu IMC atual é: {}".format(self.nome, self.Imc()))
+      print("Coeficiente atual: ", self.Coef())
 
+# Variaveis
+Nome = input("Qual seu nome? ")
+objetivo = pd.read_csv("data_med.csv", sep=',')
 
+Altura = float(input("Qual sua altura(0.00cm)? "))
+Peso = float(input("Qual seu peso(Kg)? "))
+Pescoco = float(input("Qual a medida(cm) do pescoço? "))
+Biceps = float(input("Qual a medida(cm) do biceps? "))
+Antebraco = float(input("Qual a medida(cm) do antebraço? "))
+Peito = float(input("Qual a medida(cm) do peito? "))
+Cintura = float(input("Qual a medida(cm) da cintura? "))
+Coxas = float(input("Qual a medida(cm) da coxa? "))
+Panturrilha = float(input("Qual a medida(cm) da panturriha? "))
 
+P1 = Pessoa(Nome,Altura,Peso,Pescoco,Biceps,Antebraco,Peito,Cintura,Coxas,Panturrilha)
 
+med_atual = []
+med_atual.append(P1.Coef())
+med_atual.append(P1.altura)
+med_atual.append(P1.peso)
+med_atual.append(P1.pescoco)
+med_atual.append(P1.biceps)
+med_atual.append(P1.antebraco)
+med_atual.append(P1.peito)
+med_atual.append(P1.cintura)
+med_atual.append(P1.coxas)
+med_atual.append(P1.panturrilha)
+df = pd.DataFrame(med_atual)
 
+des = float(input("Qual peso deseja chegar(Kg)? "))
+coef = round((des / P1.altura) / 100, 3)
+meta = objetivo[objetivo['Coeficiente'] == coef]
+print("O coeficiente desejado é: ", coef)
 
+print(meta["Coeficiente"][2:])
 
-
-coef_atual = [0.441,41,36,30,109,99,100,59,41]
-coef_des=[0.370,37.1,34.8,29.0,97.1,72.7,87.3,52.3,34.8]
-
-"""
-al=float(input("Qual sua altura(0.00cm)? "))
-pe=float(input("Qual seu peso(Kg)? "))
-print("Seu IMC atual é: {:.2f}".format(pe/(pow(al,2))))
-
-des=float(input("Qual peso deseja chegar(Kg)? "))
-coef=round((des/al)/100,3)
-print("O coeficiente desejado é: ",coef)
-#Ler .csv
-df=pd.read_csv('data_med.csv')
-x=df.loc[df['Coeficiente']==coef].values
-
+print(med_atual)
 plt.title("Comparativo medidas")
-plt.bar(coef_des,coef_atual)
-plt.show()
+plt.plot(meta,df)
+
 plt.gray()
 plt.xlabel('Coeficiente desejado')
 plt.ylabel('Coeficiente atual')
+plt.show()
 
 #print(coef_des)
 #print("\n\033[32m",type(coef_atual-x))
-"""
 
