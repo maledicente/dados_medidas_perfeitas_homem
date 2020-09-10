@@ -49,7 +49,6 @@ P1 = Pessoa(Nome,Altura,Peso,Pescoco,Biceps,Antebraco,Peito,Cintura,Coxas,Pantur
 
 med_atual = []
 med_atual.append(P1.Coef())
-med_atual.append(P1.peso)
 med_atual.append(P1.pescoco)
 med_atual.append(P1.biceps)
 med_atual.append(P1.antebraco)
@@ -61,12 +60,14 @@ df = pd.DataFrame(med_atual)
 
 des = float(input("Qual peso deseja chegar(Kg)? "))
 coef = round((des / P1.altura) / 100, 3)
-meta = objetivo.loc[objetivo['Coeficiente'] == coef]
+meta = objetivo[objetivo['Coeficiente'] == coef].values
+meta1 = meta[0] 
 print("O coeficiente desejado é: ", coef)
 
 print(med_atual)
 plt.title("Comparativo de medidas")
-plt.plot(meta,df)
+plt.plot(meta1,color='green',marker='o')
+plt.plot(df,color='red',marker='o')
 plt.xlabel('Coeficiente desejado')
 plt.ylabel('Coeficiente atual')
 plt.show()
