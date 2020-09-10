@@ -35,8 +35,8 @@ class Pessoa():
 Nome = input("Qual seu nome? ")
 objetivo = pd.read_csv("data_med.csv", sep=',')
 
-Altura = float(input("Qual sua altura(0.00cm)? "))
-Peso = float(input("Qual seu peso(Kg)? "))
+Altura = float(input("Qual a sua altura(0.00cm)? "))
+Peso = float(input("Qual o seu peso(Kg)? "))
 Pescoco = float(input("Qual a medida(cm) do pescoço? "))
 Biceps = float(input("Qual a medida(cm) do biceps? "))
 Antebraco = float(input("Qual a medida(cm) do antebraço? "))
@@ -49,7 +49,6 @@ P1 = Pessoa(Nome,Altura,Peso,Pescoco,Biceps,Antebraco,Peito,Cintura,Coxas,Pantur
 
 med_atual = []
 med_atual.append(P1.Coef())
-med_atual.append(P1.altura)
 med_atual.append(P1.peso)
 med_atual.append(P1.pescoco)
 med_atual.append(P1.biceps)
@@ -62,16 +61,12 @@ df = pd.DataFrame(med_atual)
 
 des = float(input("Qual peso deseja chegar(Kg)? "))
 coef = round((des / P1.altura) / 100, 3)
-meta = objetivo[objetivo['Coeficiente'] == coef]
+meta = objetivo.loc[objetivo['Coeficiente'] == coef]
 print("O coeficiente desejado é: ", coef)
 
-print(meta["Coeficiente"][2:])
-
 print(med_atual)
-plt.title("Comparativo medidas")
+plt.title("Comparativo de medidas")
 plt.plot(meta,df)
-
-plt.gray()
 plt.xlabel('Coeficiente desejado')
 plt.ylabel('Coeficiente atual')
 plt.show()
